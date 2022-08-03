@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\Style_Index.css" />
+    <None Include="wwwroot\Content\Style_Index.css" />
     <None Include="wwwroot\image\cat.png" />
     <None Include="wwwroot\image\magnifier.png" />
     <None Include="wwwroot\image\menu.png" />

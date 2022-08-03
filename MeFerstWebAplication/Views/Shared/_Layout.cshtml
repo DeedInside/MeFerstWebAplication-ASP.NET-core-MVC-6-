@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="@Url.Content("~/Content/Style_Index.css")" rel="stylesheet" type="text/css" />
+	
+	<title>@ViewBag.Title</title>
+</head>
+<body>
+	<div class="Traigle"></div>
+	<div class="wrap">
+		<div class="Wrapper">
+			<div class="Left_stat">
+				<img class="Left_Colum_image" src="~/image/cat.png" />
+				<div class="Left_colum_box">
+					<p>Зубенко Михаил</p>
+					<p class="Left_colum_text">C# Developer</p>
+				</div>
+			</div>
+			<div class="Right_Title">
+				<div class="list_li"></div>
+				<ul class="Title_list">
+					<li><a href="/Home/Index">Home</a></li>
+					<li><a href="/Home/About">About</a></li>
+					<li><a href="/Home/Skils">Skils</a></li>
+					<li><a href="/Home/Edication">Edication</a></li>
+					<li><a href="/Home/Portfolio">Portfolio</a></li>
+					<li><a href="/Home/Experiece">Experiece</a></li>
+					<li><a href="/Home/Blog">Blog</a></li>
+					<li><a href="/Home/Contact">Contact</a></li>
+					<li><img class="img_menu" src="~/image/magnifier.png"></li>
+					<li><img class="img_menu" src="~/image/menu.png"></li>
+				</ul>
+			</div>
+			@RenderBody()
+		</div>
+	</div>
+</body>
+</html>

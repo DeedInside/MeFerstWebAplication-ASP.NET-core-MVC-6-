@@ -12,6 +12,10 @@ body {
   color: white;
   background-color: #0A0A0A;
 }
+a {
+	text-decoration: none;
+	color: white;
+}
 .wrap{
 	background-color: #0A0A0A;
 }
@@ -32,12 +36,14 @@ body {
   border-left: 0px solid transparent;
   border-right: 350px solid transparent;
 }
-.list_li{
+.list_li {
 	position: absolute;
-	background-color: #21F3D7 ;
+	background-color: #21F3D7;
 	width: 80px;
-  height: 100px;
-  top: 0;
+	height: 100px;
+	top: 0;
+	text-decoration: none;
+	color: white;
 }
 .img_menu{
 

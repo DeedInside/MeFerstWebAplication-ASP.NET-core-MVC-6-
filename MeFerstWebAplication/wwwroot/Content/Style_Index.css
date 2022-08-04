@@ -51,13 +51,17 @@ a {
 	height: 25px;
 	margin-bottom: -5px;
 }
-.Button_portfolio{
+.Button_portfolio {
 	background-color: #21F3D7;
-	color: black;
 	width: 90px;
 	height: 30px;
 	margin-top: 10px;
 	margin-left: 5px;
+	line-height: 30px;
+	text-align: center;
+}
+.text_button {
+	color: black;
 }
 .p_1{
 	font-size: 22px;

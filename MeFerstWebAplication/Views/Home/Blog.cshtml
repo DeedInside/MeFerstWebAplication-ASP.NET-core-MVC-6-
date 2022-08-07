@@ -1,8 +1,11 @@
-﻿@{
+﻿@using MeFerstWebAplication.Models
+@{
 	ViewBag.Title = "Blog list";
-    Layout = "_Layout";
+	Layout = "_Layout";
+	Temporary q = new Temporary();
 }
 <head>
+	<link href="@Url.Content("~/Content/Style_blog.css")" rel="stylesheet" type="text/css" />
     <style>
         .list_li{
 	    position: absolute;
@@ -14,4 +17,31 @@
 }
     </style>
 </head>
-<div class="Right_stat">Blog</div>
+<div class="Right_stat">
+    <div class="Blok_fund_news">
+		<input class="text_button_input" type="text" name="Input_fung_item">
+		<div class="Button_Find">
+			<a class="text_button" href="Portfolio">Find</a>
+		</div>
+		<select class="Select_item">
+			<option>Всё</option>
+  			<option>Программирование</option>
+ 			<option>Спорт</option>
+ 			<option>Отдых</option>
+		</select>
+		<input class="Checkbox" type="checkbox" name="html" value="html"/>
+		<p class="Text_checkbox">Сортировать по времени</p>
+	</div>
+
+	@for(int i = 0; i < q.Blogs.Count();i++)
+{
+	<div class="Item_news">
+		<div class="Div_image_news_left">
+			<img class="Image_news_left" src=@q.Blogs[i].Url_image>
+		</div>
+		<div class="Content_news_fight">@q.Blogs[i].Categori</div>
+		<div class="Content_news_fight"><p>@q.Blogs[i].Text_Content</p></div>
+		<div class="Blok_bottom_news">@q.Blogs[i].Time</div>
+	</div>
+}
+</div>

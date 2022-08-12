@@ -11,7 +11,7 @@
             Url_image = url_image;
             Time = time;
         }
-        public string? Id { get; set; }
+        public int Id { get; set; }
         public string? Categori { get; set; }
         public string? Text_Content { get; set; }
         public string? Url_image { get; set; }

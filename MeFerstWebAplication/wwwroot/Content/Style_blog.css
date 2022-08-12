@@ -21,6 +21,8 @@
 .Item_news{
 	margin: 10px;
 	display: inline-block;
-	background-color: #2C2C2C;
-	
+	background-color: #2C2C2C;	
+}
+.Delite_Item_news{
+	float: right;
 }

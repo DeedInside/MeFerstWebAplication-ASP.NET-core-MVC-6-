@@ -1,8 +1,8 @@
-﻿@using MeFerstWebAplication.Models
+﻿@model IEnumerable<MeFerstWebAplication.Models.BlogModel>
+
 @{
 	ViewBag.Title = "Blog list";
 	Layout = "_Layout";
-	Temporary q = new Temporary();
 }
 <head>
 	<link href="@Url.Content("~/Content/Style_blog.css")" rel="stylesheet" type="text/css" />
@@ -14,7 +14,10 @@
         height: 100px;
         top: 0;
         margin-left: 513px;
-}
+		}
+		.Delite_Item_news {
+			float: right;
+		}
     </style>
 </head>
 <div class="Right_stat">
@@ -31,17 +34,23 @@
 		</select>
 		<input class="Checkbox" type="checkbox" name="html" value="html"/>
 		<p class="Text_checkbox">Сортировать по времени</p>
+		
 	</div>
 
-	@for(int i = 0; i < q.Blogs.Count();i++)
-{
-	<div class="Item_news">
+	@foreach (var item in Model)
+	{
+		<div class="Item_news">
 		<div class="Div_image_news_left">
-			<img class="Image_news_left" src=@q.Blogs[i].Url_image>
+			<img class="Image_news_left" src=@item.Url_image>
 		</div>
-		<div class="Content_news_fight">@q.Blogs[i].Categori</div>
-		<div class="Content_news_fight"><p>@q.Blogs[i].Text_Content</p></div>
-		<div class="Blok_bottom_news">@q.Blogs[i].Time</div>
-	</div>
-}
+		<div class="Content_news_fight">
+			@item.Categori
+			<form class="Delite_Item_news" asp-controller="Home" asp-action="Delete" method="post" asp-route-id="@item.Id">
+				<input type="submit" value="Удалить"/>
+			</form>
+		</div>
+		<div class="Content_news_fight"><p>@item.Text_Content</p></div>
+		<div class="Blok_bottom_news">@item.Time</div>
+		</div>
+	}
 </div>

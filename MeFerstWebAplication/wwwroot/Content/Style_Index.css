@@ -176,23 +176,23 @@ ul.Title_list li{
 	display: inline-block;
 }
 
-.Item_news {
+/*.Item_news {
 	margin: 10px;
 	display: inline-block;
 	background-color: #2C2C2C;
-}
+}*/
 
-.Div_image_news_left {
+/*.Div_image_news_left {
 	float: left;
 	margin: 5px;
 	border: 2px groove #21F3D7;
-}
+}*/
 
-.Image_news_left {
+/*.Image_news_left {
 	height: 100%;
 	max-height: 280px;
 	width: 280px;
-}
+}*/
 
 .Content_news_fight {
 	float: left;

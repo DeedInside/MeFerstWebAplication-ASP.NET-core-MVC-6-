@@ -7,22 +7,11 @@ namespace MeFerstWebAplication.Controllers
     public class HomeController : Controller
     {
         ApplicationContext db;
-        public HomeController(ApplicationContext context)
+        IWebHostEnvironment _appEnvironment;
+        public HomeController(ApplicationContext context, IWebHostEnvironment appEnvironment)
         {
             this.db = context;
-
-            //if(db.DbBlog.Any())
-            //{
-
-            //    BlogModel q_1 = new BlogModel { Categori = "Спорт", Text_Content = "11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 ", Time = "01.01.2022", Url_image = "/image/cat.png" };
-            //    BlogModel q_2 = new BlogModel { Categori = "Отдых", Text_Content = "11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 ", Time = "01.01.2022", Url_image = "/image/cat.png" };
-            //    BlogModel q_3 = new BlogModel { Categori = "Программирование", Text_Content = "11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 ", Time = "01.01.2022", Url_image = "/image/cat.png" };
-            //    BlogModel q_4 = new BlogModel { Categori = "Спорт", Text_Content = "11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 11111 ", Time = "01.01.2022", Url_image = "/image/cat.png" };
-
-            //    db.DbBlog.AddRange(q_1,q_2,q_3,q_4);
-            //    db.SaveChanges();
-
-            //}
+            this._appEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
@@ -49,9 +38,14 @@ namespace MeFerstWebAplication.Controllers
         {
             return View();
         }
+        public IActionResult BlogAdd()
+        {
+            return View();
+        }
         public async Task<IActionResult> Blog()
-        {   
-            return View(await db.DbBlog.ToListAsync());
+        {
+            ViewBag.BlogOut = await db.DbBlog.ToListAsync();
+            return View();
         }
         public IActionResult Contact()
         {
@@ -72,6 +66,33 @@ namespace MeFerstWebAplication.Controllers
                 }
             }
             return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddItems(BlogModel blogModel, IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                // путь к папке Files
+                string path = "/image/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                BlogModel blog = new BlogModel()
+                {
+                    Id = blogModel.Id,
+                    Categori = blogModel.Categori,
+                    Text_Content = blogModel.Text_Content,
+                    Time = DateTime.Now.ToString("dd/MM/yyyy"),
+                    Url_image = path
+                };
+                db.DbBlog.Add(blog);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Blog");
+            }
+            // return NotFound();
+            return View("Index");
         }
     }
 }

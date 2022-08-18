@@ -11,6 +11,16 @@
             Url_image = url_image;
             Time = time;
         }
+
+        public BlogModel(int id, string? categori, string? text_Content, string? url_image, string? time)
+        {
+            Id = id;
+            Categori = categori;
+            Text_Content = text_Content;
+            Url_image = url_image;
+            Time = time;
+        }
+
         public int Id { get; set; }
         public string? Categori { get; set; }
         public string? Text_Content { get; set; }

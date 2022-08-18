@@ -1,11 +1,11 @@
-﻿@model IEnumerable<MeFerstWebAplication.Models.BlogModel>
-
+﻿@*@model IEnumerable<MeFerstWebAplication.Models.BlogModel>*@
 @{
 	ViewBag.Title = "Blog list";
 	Layout = "_Layout";
 }
 <head>
-	<link href="@Url.Content("~/Content/Style_blog.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/StyleBlog.css")" rel="stylesheet" type="text/css" />
+	
     <style>
         .list_li{
 	    position: absolute;
@@ -34,10 +34,15 @@
 		</select>
 		<input class="Checkbox" type="checkbox" name="html" value="html"/>
 		<p class="Text_checkbox">Сортировать по времени</p>
-		
+		<p class="Add_new_news">
+			<a href="#">+</a>
+		</p>
 	</div>
-
-	@foreach (var item in Model)
+	
+	@{
+			await Html.RenderPartialAsync("BlogAdd");
+	}
+	@foreach (var item in ViewBag.BlogOut)
 	{
 		<div class="Item_news">
 		<div class="Div_image_news_left">

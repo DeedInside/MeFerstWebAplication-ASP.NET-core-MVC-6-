@@ -1,0 +1,33 @@
+﻿@model MeFerstWebAplication.Models.BlogModel
+
+
+<head>
+	<link href="@Url.Content("~/Content/StaleBlogAdd.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<form asp-action="AddItems" asp-controller="Home" method="post" enctype="multipart/form-data">
+<div class="Item_news" >
+	<div class="Div_image_news_add">
+		<img class="Image_news_add" src="uploadedFile" title="нет изображения">
+	</div>
+		<div class="Content_news_fight ">
+			<select class="Select_item_add" asp-for="Categori" asp-items="ViewBag.Categori">
+			<option>Всё</option>
+			<option>Программирование</option>
+			<option>Спорт</option>
+			<option>Отдых</option>
+		</select>
+		<div class="text_categori">Выберите категорию</div>
+	</div>
+		<div class="Content_news_fight">
+			<input class="text_button_input_add" type="text" asp-for="Text_Content">
+	</div>
+	<div class="Blok_bottom_news_add">
+			<input class="text_button_add" type="submit" value="Add" />
+		<input type="date" name="calendar" asp-for="Time" value="Time"/>
+
+	</div>
+	<br>
+	<input class="Add_image" type="file" asp-for="Url_image" name="uploadedFile" />
+</div>
+</form>

@@ -10,10 +10,11 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServe
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 app.UseStaticFiles();
 
 app.MapControllerRoute(
 name: "default",
-pattern: "{controller=Home}/{action=Index}/{id?}");
+pattern: "{controller=Home}/{action=Blog}/{id?}");
 
 app.Run();

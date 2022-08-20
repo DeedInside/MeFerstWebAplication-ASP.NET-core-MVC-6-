@@ -1,11 +1,9 @@
-﻿@*@model IEnumerable<MeFerstWebAplication.Models.BlogModel>*@
-@{
+﻿@{
 	ViewBag.Title = "Blog list";
 	Layout = "_Layout";
 }
 <head>
 	<link href="@Url.Content("~/Content/StyleBlog.css")" rel="stylesheet" type="text/css" />
-	
     <style>
         .list_li{
 	    position: absolute;
@@ -21,41 +19,33 @@
     </style>
 </head>
 <div class="Right_stat">
-    <div class="Blok_fund_news">
-		<input class="text_button_input" type="text" name="Input_fung_item">
-		<div class="Button_Find">
-			<a class="text_button" href="Portfolio">Find</a>
-		</div>
-		<select class="Select_item">
-			<option>Всё</option>
-  			<option>Программирование</option>
- 			<option>Спорт</option>
- 			<option>Отдых</option>
-		</select>
-		<input class="Checkbox" type="checkbox" name="html" value="html"/>
-		<p class="Text_checkbox">Сортировать по времени</p>
-		<p class="Add_new_news">
-			<a href="#">+</a>
-		</p>
-	</div>
+    @{
+		await Html.RenderPartialAsync("Fund");
+	}
 	
 	@{
-			await Html.RenderPartialAsync("BlogAdd");
+		await Html.RenderPartialAsync("BlogAdd");
 	}
 	@foreach (var item in ViewBag.BlogOut)
 	{
+		@if( ViewBag.BlogOut != null)
+		{
 		<div class="Item_news">
 		<div class="Div_image_news_left">
 			<img class="Image_news_left" src=@item.Url_image>
 		</div>
 		<div class="Content_news_fight">
 			@item.Categori
-			<form class="Delite_Item_news" asp-controller="Home" asp-action="Delete" method="post" asp-route-id="@item.Id">
+			<form class="Delite_Item_news" asp-controller="Blog" asp-action="Delete" method="post" asp-route-id="@item.Id">
 				<input type="submit" value="Удалить"/>
 			</form>
 		</div>
 		<div class="Content_news_fight"><p>@item.Text_Content</p></div>
 		<div class="Blok_bottom_news">@item.Time</div>
 		</div>
+		}
+		else{
+			<h1>Записи отсутствуют</h1>
+		}
 	}
 </div>

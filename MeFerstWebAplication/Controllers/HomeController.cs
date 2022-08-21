@@ -2,19 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using MeFerstWebAplication.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MeFerstWebAplication.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationContext db;
-        IWebHostEnvironment _appEnvironment;
-        public HomeController(ApplicationContext context, IWebHostEnvironment appEnvironment)
-        {
-            this.db = context;
-            this._appEnvironment = appEnvironment;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -23,31 +16,37 @@ namespace MeFerstWebAplication.Controllers
         {
             return View();
         }
+        [Authorize]
         public IActionResult Skils()
         {
             return View();
         }
+        [Authorize]
         public IActionResult Edication()
         {
             return View();
         }
+        [Authorize]
         public IActionResult Portfolio()
         {
             return View();
         }
+        [Authorize]
         public IActionResult Experiece()
         {
             return View();
         }
-        //public IActionResult Blog()
-        //{
-        //    return RedirectPermanent("~/Home/Index");
-        //    //return RedirectPermanent("~/Blog/Blog");
-        //}
-        
+        [Authorize()]
         public IActionResult Contact()
         {
             return View();
-        }   
+        }
+        
+        //[HttpPost]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await _signInManager.SignOutAsync();
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MeFerstWebAplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
@@ -14,16 +15,12 @@ namespace MeFerstWebAplication.Controllers
             this.db = context;
             this._appEnvironment = appEnvironment;
         }
+        [Authorize]
         public async Task<IActionResult> Blog()
         {
             ViewBag.BlogOut = await db.DbBlog.ToListAsync();
             return View();
         }
-        //public IActionResult Contact()
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public async Task<IActionResult> Delete(int? id)
         {

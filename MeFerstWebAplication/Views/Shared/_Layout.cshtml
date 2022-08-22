@@ -14,11 +14,22 @@
 	<div class="wrap">
 		<div class="Wrapper">
 			<div class="Left_stat">
-				<img class="Left_Colum_image" src="~/image/cat.png" />
-				<div class="Left_colum_box">
-					<p>Зубенко Михаил</p>
-					<p class="Left_colum_box_User">C# Developer</p>
-				</div>
+				@if (User.Identity.Name == null)
+				{
+					<img class="Left_Colum_image" src="~/image/cat.png" />
+					<div class="Left_colum_box">
+						<p>Зубенко Михаил</p>
+						<p class="Left_colum_box_User">C# Developer</p>
+					</div>
+				}
+				else
+				{
+					<img class="Left_Colum_image" src="~/image/cat.png" />
+					<div class="Left_colum_box">
+						<p>@User.Identity.Name</p>
+						<p class="Left_colum_box_User">C# Developer</p>
+					</div>
+				}
 				<div class="Left_colum_box">
 					@if (User.Identity.Name == null)
 					{

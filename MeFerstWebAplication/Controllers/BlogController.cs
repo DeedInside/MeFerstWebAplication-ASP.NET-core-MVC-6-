@@ -20,7 +20,6 @@ namespace MeFerstWebAplication.Controllers
             this._logger = logger;
         }
         
-        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Blog()
         {
             ViewBag.BlogOut = await db.DbBlog.ToListAsync();

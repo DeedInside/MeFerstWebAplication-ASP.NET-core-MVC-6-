@@ -15,9 +15,11 @@ namespace MeFerstWebAplication.Controllers
     public class AccountController : Controller
     {
         private ApplicationContext db;
-        public AccountController(ApplicationContext context)
+        IWebHostEnvironment _appEnvironment;
+        public AccountController(ApplicationContext context, IWebHostEnvironment appEnvironment)
         {
             db = context;
+            _appEnvironment = appEnvironment;
         }
 
         [HttpGet]
@@ -57,15 +59,37 @@ namespace MeFerstWebAplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterModel model)
+        public async Task<IActionResult> Register(RegisterModel model, IFormFile uploadedFile)
         {
-           // if (ModelState.IsValid)
+            string path;
+            if (uploadedFile == null)
+            {
+                path = "/User/BlackSqaut.png";
+            }
+            else
+            {
+                // путь к папке Files
+                path = "/User/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+            }
+            string age_user = Convert.ToString( DateTime.Now.Year - Convert.ToInt32( model.Age.Substring(0, model.Age.Length - 6)) );
+            // if (ModelState.IsValid)
             {
                 User? user = await db.DbUser.FirstOrDefaultAsync(u => u.Login == model.Login);
                 if (user == null)
                 {
                     // добавляем пользователя в бд
-                    user = new User { Login = model.Login, Password = model.Password };
+                    user = new User { 
+                        Login = model.Login, 
+                        Password = model.Password, 
+                        Email = model.Email, 
+                        Age = age_user, 
+                        ImageUserUrl = path };
+
                     Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "User");
                     if (userRole != null)
                         user.Role = userRole;

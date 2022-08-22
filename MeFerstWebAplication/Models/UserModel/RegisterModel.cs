@@ -6,13 +6,16 @@ namespace MeFerstWebAplication.Models.UserModel
     {
         [Required(ErrorMessage = "Не указан Login")]
         public string? Login { get; set; }
+        [Required(ErrorMessage = "Не указан Login")]
+        [EmailAddress]
+        public string? Email { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
         [Required(ErrorMessage = "Не указан Age")]
-        public int Age { get; set; }
+        public string Age { get; set; }
         [Required(ErrorMessage = "Не указан ImageUser")]
         public string? ImageUser { get; set; }
 

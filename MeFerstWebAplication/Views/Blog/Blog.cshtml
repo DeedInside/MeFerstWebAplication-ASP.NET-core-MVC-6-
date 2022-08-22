@@ -23,7 +23,8 @@
 		await Html.RenderPartialAsync("Fund");
 	}
 	
-	@{
+	@if (User.IsInRole("Admin") || User.IsInRole("User"))
+	{
 		await Html.RenderPartialAsync("BlogAdd");
 	}
 	@foreach (var item in ViewBag.BlogOut)

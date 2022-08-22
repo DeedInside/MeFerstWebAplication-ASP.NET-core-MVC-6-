@@ -7,12 +7,12 @@
 В основе представления использутеся Razor(html+css) 
 Вся основная логическая часть написана на чистом с#
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact)](https://github.com/DeedInside/MeFerstWebAplication-ASP.NET-core-MVC-6-)
 
 В проекте реализованно
 - Система регистрации пользователей и доступа пользователя по ролям (Admin, User). Сама система реализована с помощью аутентификации на основе куки.
 - Реализована система новостной ленты (вкладка Blog). Просмотр ленты имеют доступ все пользователи, добавлять только авторизованные пользователи, удалять только пользователь с ролью Admin.
 - В новостной ленте (Blog) реализована сортировка по категориям и дате добавления поста(в преспективе поиск по контенту)
 
-##Преспективы проекта 
+## Преспективы проекта 
 - Реализовать 

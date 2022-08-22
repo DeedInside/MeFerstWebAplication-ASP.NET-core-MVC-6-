@@ -7,7 +7,7 @@
 В основе представления использутеся Razor(html+css) 
 Вся основная логическая часть написана на чистом с#
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact)](https://github.com/DeedInside/MeFerstWebAplication-ASP.NET-core-MVC-6-)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=DeedInside&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 В проекте реализованно
 - Система регистрации пользователей и доступа пользователя по ролям (Admin, User). Сама система реализована с помощью аутентификации на основе куки.

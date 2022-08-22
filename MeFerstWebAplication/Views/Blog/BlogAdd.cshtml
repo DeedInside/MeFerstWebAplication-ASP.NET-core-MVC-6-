@@ -22,8 +22,8 @@
 			<input class="text_button_input_add" type="text" asp-for="Text_Content">
 	</div>
 	<div class="Blok_bottom_news_add">
-			<input class="text_button_add" type="submit" value="Add" />
-		@*<input type="date" name="calendar" asp-for="Time" value="Time"/>*@
+		<input class="text_button_add" type="submit" value="Add" />
+			<input type="date" name="Time" asp-for="Time" value="Time" asp-format="yyyy-mm-dd" />
 	</div>
 	<br>
 	<input class="Add_image" type="file" asp-for="Url_image" name="uploadedFile" />

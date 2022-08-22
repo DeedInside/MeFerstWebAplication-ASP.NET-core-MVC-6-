@@ -36,9 +36,12 @@
 		</div>
 		<div class="Content_news_fight">
 			@item.Categori
-			<form class="Delite_Item_news" asp-controller="Blog" asp-action="Delete" method="post" asp-route-id="@item.Id">
-				<input type="submit" value="Удалить"/>
-			</form>
+			@if (User.IsInRole("Admin"))
+			{
+				<form class="Delite_Item_news" asp-controller="Blog" asp-action="Delete" method="post" asp-route-id="@item.Id">
+					<input type="submit" value="Удалить"/>
+				</form>
+			}
 		</div>
 		<div class="Content_news_fight"><p>@item.Text_Content</p></div>
 		<div class="Blok_bottom_news">@item.Time</div>

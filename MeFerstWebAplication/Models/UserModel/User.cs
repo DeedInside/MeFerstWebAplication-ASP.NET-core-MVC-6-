@@ -1,15 +1,17 @@
-﻿namespace MeFerstWebAplication.Models
+﻿namespace MeFerstWebAplication.Models.UserModel
 {
     public class User
     {
-        public User(int id, string? login, string? password, string? email, int? age, string? imageUser)
+        public User(int id, string? login, string? password, string? email, int? age, string? imageUserUrl, int? roleId, Role role)
         {
             Id = id;
             Login = login;
             Password = password;
             Email = email;
             Age = age;
-            ImageUser = imageUser;
+            ImageUserUrl = imageUserUrl;
+            RoleId = roleId;
+            Role = role;
         }
         public User()
         {
@@ -20,9 +22,9 @@
         public string? Password { get; set; }
         public string? Email { get; set; }
         public int? Age { get; set; }
-        public string? ImageUser { get; set; }
-
-
+        public string? ImageUserUrl { get; set; }
+        public int? RoleId { get; set; }
+        public Role Role { get; set; }
 
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.IO;
 
 namespace MeFerstWebAplication.Controllers
@@ -10,12 +12,15 @@ namespace MeFerstWebAplication.Controllers
     {
         ApplicationContext db;
         IWebHostEnvironment _appEnvironment;
-        public BlogController(ApplicationContext context, IWebHostEnvironment appEnvironment)
+        private readonly ILogger _logger;
+        public BlogController(ApplicationContext context, IWebHostEnvironment appEnvironment, ILogger<HomeController> logger)
         {
             this.db = context;
             this._appEnvironment = appEnvironment;
+            this._logger = logger;
         }
-        [Authorize]
+        
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Blog()
         {
             ViewBag.BlogOut = await db.DbBlog.ToListAsync();
@@ -54,6 +59,12 @@ namespace MeFerstWebAplication.Controllers
                     await uploadedFile.CopyToAsync(fileStream);
                 }
             }
+
+            if (blogModel.Time == null)
+            {
+                blogModel.Time = DateTime.Now.ToString("dd/MM/yyyy");
+            }
+
             if (blogModel.Text_Content != null && blogModel.Categori != null)
             {
                 BlogModel blog = new BlogModel()
@@ -61,7 +72,7 @@ namespace MeFerstWebAplication.Controllers
                     Id = blogModel.Id,
                     Categori = blogModel.Categori,
                     Text_Content = blogModel.Text_Content,
-                    Time = DateTime.Now.ToString("dd/MM/yyyy"),
+                    Time = blogModel.Time,
                     Url_image = path
                 };
                 db.DbBlog.Add(blog);

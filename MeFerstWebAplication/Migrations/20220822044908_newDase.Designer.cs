@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeFerstWebAplication.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220820165243_MigrationName")]
-    partial class MigrationName
+    [Migration("20220822044908_newDase")]
+    partial class newDase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,8 +38,8 @@ namespace MeFerstWebAplication.Migrations
                     b.Property<string>("Text_Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("Time")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Url_image")
                         .HasColumnType("nvarchar(max)");
@@ -49,7 +49,24 @@ namespace MeFerstWebAplication.Migrations
                     b.ToTable("DbBlog");
                 });
 
-            modelBuilder.Entity("MeFerstWebAplication.Models.User", b =>
+            modelBuilder.Entity("MeFerstWebAplication.Models.UserModel.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("MeFerstWebAplication.Models.UserModel.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +80,7 @@ namespace MeFerstWebAplication.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUser")
+                    b.Property<string>("ImageUserUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Login")
@@ -72,9 +89,28 @@ namespace MeFerstWebAplication.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("DbUser");
+                });
+
+            modelBuilder.Entity("MeFerstWebAplication.Models.UserModel.User", b =>
+                {
+                    b.HasOne("MeFerstWebAplication.Models.UserModel.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("MeFerstWebAplication.Models.UserModel.Role", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

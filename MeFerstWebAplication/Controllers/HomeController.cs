@@ -16,27 +16,27 @@ namespace MeFerstWebAplication.Controllers
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult Skils()
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult Edication()
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult Portfolio()
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult Experiece()
         {
             return View();
         }
-        [Authorize()]
+        [Authorize(Roles = "Admin")]
         public IActionResult Contact()
         {
             return View();

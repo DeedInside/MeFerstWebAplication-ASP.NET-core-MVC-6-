@@ -13,16 +13,13 @@
         top: 0;
         margin-left: 513px;
 		}
-		.Delite_Item_news {
-			float: right;
-		}
     </style>
 </head>
 <div class="Right_stat">
     @{
 		await Html.RenderPartialAsync("Fund");
 	}
-	
+
 	@if (User.IsInRole("Admin") || User.IsInRole("User"))
 	{
 		await Html.RenderPartialAsync("BlogAdd");
@@ -52,4 +49,5 @@
 			<h1>Записи отсутствуют</h1>
 		}
 	}
+	<script src="~/Script/Add_blog_script.js"/>
 </div>

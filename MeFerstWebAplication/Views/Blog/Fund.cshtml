@@ -2,6 +2,12 @@
 @{
 	Layout = null;
 }
+<style>
+	.test_click
+	{
+		cursor:pointer;
+	}
+</style>
 <form asp-action="FundCategoti" asp-controller="Blog" method="post" enctype="multipart/form-data">
 <div class="Blok_fund_news">
 	<input class="text_button_input" type="text" name="Input_fung_item">
@@ -18,7 +24,7 @@
 	<input class="Checkbox" type="checkbox" asp-for="ChectDataTime" name="html" value="html" />
 	<p class="Text_checkbox">Сортировать по времени</p>
 	<p class="Add_new_news">
-			<a href="">+</a>
+			<span class="test_click">+</span>
 	</p>
 </div>
 </form>

@@ -16,6 +16,8 @@
     float: left;
     margin-left: 5px;
     font-size: 18px;
+    resize:none;
+    padding: 15px;
 }
 
 .Div_image_news_add {

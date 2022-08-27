@@ -27,11 +27,6 @@ namespace MeFerstWebAplication.Controllers
             return View();
         }
         [Authorize(Roles = "Admin, User")]
-        public IActionResult Portfolio()
-        {
-            return View();
-        }
-        [Authorize(Roles = "Admin, User")]
         public IActionResult Experiece()
         {
             return View();

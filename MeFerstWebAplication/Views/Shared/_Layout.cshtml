@@ -13,13 +13,14 @@
 	<div class="Traigle"></div>
 	<div class="wrap">
 		<div class="Wrapper">
+			@*Левое блок аккаунта*@
 			<div class="Left_stat">
 				@if (User.Identity.Name == null)
 				{
 					<img class="Left_Colum_image" src="~/image/cat.png" />
 					<div class="Left_colum_box">
 						<p>Зубенко Михаил</p>
-						<p class="Left_colum_box_User">C# Developer</p>
+						<p class="Left_colum_text">C# Developer</p>
 					</div>
 				}
 				else
@@ -27,21 +28,29 @@
 					<img class="Left_Colum_image" src="~/image/cat.png" />
 					<div class="Left_colum_box">
 						<p>@User.Identity.Name</p>
-						<p class="Left_colum_box_User">C# Developer</p>
+						<p class="Left_colum_text">C# Developer</p>
 					</div>
 				}
 				<div class="Left_colum_box">
 					@if (User.Identity.Name == null)
 					{
-					<a href="/Account/Login">Login</a> <br />
+						<span class="LoginOn">Login</span>
+						<br/>
+					@*<a href="/Account/Login">Login</a> <br />*@
 					<a href="/Account/Register">Register</a>
 					}
 					else
 					{
 						<a href="/Account/Logout">exit</a>
 					}
+					<script>
+							document.querySelector('.LoginOn').onclick = function () {
+							document.querySelector(".box_Login_out").classList.toggle("box_Login_open")
+						}
+					</script>
 				</div>
 			</div>
+			@*Блок навигации по сайту*@
 			<div class="Right_Title">
 				<div class="list_li"></div>
 				<ul class="Title_list">
@@ -49,7 +58,7 @@
 					<li><a href="/Home/About">About</a></li>
 					<li><a href="/Home/Skils">Skils</a></li>
 					<li><a href="/Home/Edication">Edication</a></li>
-					<li><a href="/Home/Portfolio">Portfolio</a></li>
+					<li><a href="/Portfolio/Portfolio">Portfolio</a></li>
 					<li><a href="/Home/Experiece">Experiece</a></li>
 					<li><a href="/Blog/Blog">Blog</a></li>
 					<li><a href="/Home/Contact">Contact</a></li>
@@ -59,6 +68,33 @@
 			</div>
 			@RenderBody()
 		</div>
+	</div>
+	@*Окно входа на аккаунт*@
+	<div class="box_Login_out">
+		@model MeFerstWebAplication.Models.UserModel.LoginModel
+		<h2>Вход на сайт</h2>
+		<form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+			<div asp-validation-summary="ModelOnly"></div>
+			<div>
+				<div class="loginANDpassword">
+					<label class="Label_q" asp-for="Login">Введите Login</label>
+					<input type="text" asp-for="Login" />
+					<span asp-validation-for="Login" />
+				</div>
+				<div>
+					<label asp-for="Password">Введите Password</label>
+					<input asp-for="Password" />
+					<span asp-validation-for="Password" />
+				</div>
+				<input class="Button_portfolio" type="submit" value="Войти" />
+				<span class="Button_portfolio_2">Отмена</span>
+				<script>
+					document.querySelector('.Button_portfolio_2').onclick = function () {
+						document.querySelector(".box_Login_out").classList.toggle("box_Login_open")
+					}
+				</script>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

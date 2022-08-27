@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace MeFerstWebAplication.Controllers
 {
@@ -88,14 +90,41 @@ namespace MeFerstWebAplication.Controllers
             if(fundModel != null)
             {
                 var fund = await db.DbBlog.Where(p => p.Categori == fundModel.ChectCategori).ToListAsync();
+                if (fundModel.ChectDataTime == true)
+                {
+                    SortDataTime(fund);
+                }
                 ViewBag.BlogOut = fund;
             }
             if (fundModel.ChectCategori == "Всё")
             {
-                ViewBag.BlogOut = await db.DbBlog.ToListAsync();
+                if (fundModel.ChectDataTime == true)
+                {
+                    var fund = SortDataTime(await db.DbBlog.ToListAsync());
+                    ViewBag.BlogOut = fund;
+                }
+                else
+                    ViewBag.BlogOut = await db.DbBlog.ToListAsync();
             }
             return View("Blog");
         }
+        private List<BlogModel> SortDataTime(List<BlogModel> fund)
+        {
+            for (int i = 0; i < fund.Count(); i++)
+            {
+                for (int j = 0; j < fund.Count(); j++)
+                {
+                    if (Convert.ToDateTime(fund[i].Time) > Convert.ToDateTime(fund[j].Time))
+                    {
+                        var temp = fund[i];
+                        fund[i] = fund[j];
+                        fund[j] = temp;
+                    }
+                }
+            }
+            return fund;
+        }
     }
 }
+
 

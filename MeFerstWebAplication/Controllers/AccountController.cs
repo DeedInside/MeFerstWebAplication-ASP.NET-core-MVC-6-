@@ -27,7 +27,11 @@ namespace MeFerstWebAplication.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Вход на аккаунт
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
@@ -56,12 +60,18 @@ namespace MeFerstWebAplication.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Регистрация пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="uploadedFile"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model, IFormFile uploadedFile)
         {
             string path;
+            string age_user;
             if (uploadedFile == null)
             {
                 path = "/User/BlackSqaut.png";
@@ -76,10 +86,18 @@ namespace MeFerstWebAplication.Controllers
                     await uploadedFile.CopyToAsync(fileStream);
                 }
             }
-            string age_user = Convert.ToString( DateTime.Now.Year - Convert.ToInt32( model.Age.Substring(0, model.Age.Length - 6)) );
-            // if (ModelState.IsValid)
+            if (model.Age != null)
+            {
+                age_user = Convert.ToString(DateTime.Now.Year - Convert.ToInt32(model.Age.Substring(0, model.Age.Length - 6)));
+            }
+            else
+            {
+                age_user = "Undefinitely";
+            }
+                // if (ModelState.IsValid)
             {
                 User? user = await db.DbUser.FirstOrDefaultAsync(u => u.Login == model.Login);
+                // Добавление user в геристарции
                 if (user == null)
                 {
                     // добавляем пользователя в бд
@@ -105,7 +123,11 @@ namespace MeFerstWebAplication.Controllers
             }
            // return View(model);
         }
-
+        /// <summary>
+        /// Авторизация пользователя в claim
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         private async Task Authenticate(User user)
         {
             var claims = new List<Claim>
@@ -119,7 +141,10 @@ namespace MeFerstWebAplication.Controllers
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
-
+        /// <summary>
+        /// Выход с аккаунта
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Logout()
         {

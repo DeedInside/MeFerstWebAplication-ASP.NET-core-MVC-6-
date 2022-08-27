@@ -19,7 +19,8 @@
 		<div class="text_categori">Выберите категорию</div>
 	</div>
 		<div class="Content_news_fight">
-			<input class="text_button_input_add" type="text" asp-for="Text_Content">
+			@*<input class="text_button_input_add" type="text" asp-for="Text_Content" placeholder="Введите описание" required >*@
+			<textarea class="text_button_input_add" placeholder="Comment..." asp-for="Text_Content" required></textarea>
 	</div>
 	<div class="Blok_bottom_news_add">
 		<input class="text_button_add" type="submit" value="Add" />

@@ -1,0 +1,51 @@
+﻿@model MeFerstWebAplication.Models.UserModel.RegisterModel
+
+<head>
+    <link href="@Url.Content("~/Content/Password.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<div class="Right_stat">
+    <form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+
+        <div class="box_Login_out">
+
+            <div class="Div_image_news_add">
+                <img class="Image_news_add" src="uploadedFile" title="нет изображения">
+            </div>
+            <div class="reg">
+                <h2>Регистрация</h2>
+                <div class="validation" asp-validation-summary="ModelOnly"></div>
+                <div>
+                    <div>
+                        <label class="loginANDpassword" asp-for="Login">Введите Login</label><br />
+                        <input class="loginANDpassword" type="text" asp-for="Login" />
+                        <span asp-validation-for="Login" />
+                    </div>
+                    <div>
+                        <label class="loginANDpassword" asp-for="Password">Введите пароль</label><br />
+                        <input class="loginANDpassword" asp-for="Password" />
+                        <span asp-validation-for="Password" />
+                    </div>
+                    <div>
+                        <label class="loginANDpassword" asp-for="ConfirmPassword">Повторите пароль</label><br />
+                        <input class="loginANDpassword" asp-for="ConfirmPassword" />
+                        <span asp-validation-for="ConfirmPassword" />
+                    </div>
+                </div>
+            </div>
+            <div class="reg_2">
+                <div>
+                    <label class="loginANDpassword" asp-for="Email">Введите Email</label><br />
+                    <input class="loginANDpassword" type="text" asp-for="Email" />
+                    <span asp-validation-for="Email" />
+                </div>
+            </div>
+        </div>
+        <input class="Add_image" type="file" asp-for="ImageUser" name="uploadedFile" />
+        <div class="Blok_bottom_news_add">
+            <input class="text_button_add" type="submit" value="Регистрация" />
+            <input type="date" name="Age" asp-for="Age" value="Age" asp-format="yyyy-mm-dd" />
+            <p>Введите дату рождения</p>
+        </div>
+    </form>
+</div>

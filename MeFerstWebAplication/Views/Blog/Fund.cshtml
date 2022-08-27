@@ -10,21 +10,23 @@
 </style>
 <form asp-action="FundCategoti" asp-controller="Blog" method="post" enctype="multipart/form-data">
 <div class="Blok_fund_news">
-	<input class="text_button_input" type="text" name="Input_fung_item">
+	<input class="text_button_input" type="search" name="Input_fung_item">
 	<div class="Button_Find">
-		
-			<input class="text_button" type="submit" value="Find" />
+		<input class="text_button" type="submit" value="Find" />
 	</div>
-		<select class="Select_item" asp-for="ChectCategori" asp-items="ViewBag.ChectCategori">
+	<select class="Select_item" asp-for="ChectCategori" asp-items="ViewBag.ChectCategori">
 		<option>Всё</option>
 		<option>Программирование</option>
 		<option>Спорт</option>
 		<option>Отдых</option>
 	</select>
-	<input class="Checkbox" type="checkbox" asp-for="ChectDataTime" name="html" value="html" />
+		<input class="Checkbox" type="checkbox" asp-for="ChectDataTime" />
 	<p class="Text_checkbox">Сортировать по времени</p>
 	<p class="Add_new_news">
+		@if (User.IsInRole("Admin") || User.IsInRole("User"))
+		{
 			<span class="test_click">+</span>
+		}
 	</p>
 </div>
 </form>

@@ -26,7 +26,6 @@ a {
 	position: absolute;
 	left: 50%;
 	margin-left: -540px;
-	
 }
 .Traigle{
 	position: absolute;
@@ -89,12 +88,17 @@ a {
 	font-size: 14px;
 	margin: 5px;
 }
-.Left_stat{
+.Left_stat {
 	float: left;
-	height: 1000px;
+	height: 700px;
 	width: 20%;
 	margin: 10px;
 	background-color: #222222;
+	
+	position: sticky;
+	top: 15px;
+	min-height: 2em;
+
 }
 
 .Right_stat_info{
@@ -128,7 +132,6 @@ a {
 .Right_stat{
 	float: left;
 	width: 76%;
-	height: 1000px;
 	background-color: #222222;
 	margin: 10px;
 }

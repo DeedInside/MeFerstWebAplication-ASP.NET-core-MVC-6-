@@ -134,3 +134,6 @@
 	position: static;
 	transition: 1s;
 }
+.Text_input_blog {
+	word-wrap: break-word;
+}
